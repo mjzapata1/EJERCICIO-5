@@ -67,7 +67,7 @@ class Visita:
       self.__fecha = ""
       self.__registro = ""
       self.__notas = ""
-      self.__indices = []
+      self.__indices = Indices()
 
 
     def verFecha(self):
@@ -100,7 +100,7 @@ class Paciente:
       self.__nombre = ""
       self.__ced = 0
       self.__gen = ""
-      self.__visitas = []
+      self.__visitas = {} #Clave - Fecha, Valor - Visita
 
    def verNombre(self):
       return self.__nombre 
@@ -120,9 +120,12 @@ class Paciente:
    def asignarGen(self,g):
       self.__gen = g
 
-   def verVisitas(self):
+   def verVisitas(self,f):
+      return self.__visitas.get(f)
+   
+   def verListaVisitas(self,f):
       return self.__visitas
-
+   
    def asignarVisitas(self,v):
       self.__visitas = v
 
@@ -130,7 +133,7 @@ class Sistema:
    def __init__(self):
       self.__lista_Pacientes = {}
       def verificarExistencia(self,ced):
-         if ced in [self.__lista_Pacientes]:
+         if ced in self.__lista_Pacientes:
             return True
          return False
       def ingresarInfo(self,ced,pac):
@@ -144,12 +147,12 @@ class Sistema:
                pac.asignarNombre(name)
 
       def eliminarPaciente(self,ced):
-         for pac in [self.__lista_Pacientes]:
+         for pac in self.__lista_Pacientes:
             if ced in pac:
                self.__lista_Pacientes.pop(ced)
          return False
       
-      
+
 
 
 
